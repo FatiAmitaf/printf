@@ -28,7 +28,7 @@ int _printf(const char *format, ...)
 			{
 				if (format[b + 1] == 0)
 					return (-1);
-				if (format[b + 1] == *(ops[d].forma))
+				if (format[b + 1] == *(ops[d].id))
 				{
 					cuenf = cuenf + ops[d].f(valist);
 					c = 2;
