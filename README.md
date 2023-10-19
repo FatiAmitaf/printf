@@ -1,2 +1,2 @@
 # 0x11. C - printf
-This is project done by Fatima and Chris
+This is project done by Fatima and Christopher
