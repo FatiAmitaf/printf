@@ -1,45 +1,48 @@
+#include <stdio.h>
 #include "main.h"
+#include <stdarg.h>
 /**
- * _printf - is a function that selects the correct function to print.
- * @format: identifier to look for.
- * Return: the length of the string.
+ * _printf - funtion to print according to format c, s, i, f, d
+ * @format: input format to print
+ * Return: integer to check what is
  */
-int _printf(const char * const format, ...)
+int _printf(const char *format, ...)
 {
-	convert_match m[] = {
-		{"%s", printf_string}, {"%c", printf_char},
-		{"%%", printf_37},
-		{"%i", printf_int}, {"%d", printf_dec}, {"%r", printf_srev},
-		{"%R", printf_rot13}, {"%b", printf_bin}, {"%u", printf_unsigned},
-		{"%o", printf_oct}, {"%x", printf_hex}, {"%X", printf_HEX},
-		{"%S", printf_exclusive_string}, {"%p", printf_pointer}
+	va_list valist;
+	int b = 0, c = 0, d = 0, cuenf = 0, len = 0, e = 0;
+	formati ops[] = {
+		{"c", printch}, {"s", prints}, {"i", printdi},
+		{"d", printdi}, {"%", printper}, {"b", printbi},
+		{"r", printrev}, {"R", printrot}
 	};
 
-	va_list args;
-	int i = 0, j, len = 0;
-
-	va_start(args, format);
-	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
+	va_start(valist, format);
+	if (format == NULL)
 		return (-1);
-
-Here:
-	while (format[i] != '\0')
+	while (format != NULL && format[b] != 0)
 	{
-		j = 13;
-		while (j >= 0)
+		c = 0;
+		if (format[b] == '%')
 		{
-			if (m[j].id[0] == format[i] && m[j].id[1] == format[i + 1])
+			for (d = 0; d < 8; d++)
 			{
-				len += m[j].f(args);
-				i = i + 2;
-				goto Here;
+				if (format[b + 1] == 0)
+					return (-1);
+				if (format[b + 1] == *(ops[d].forma))
+				{
+					cuenf = cuenf + ops[d].f(valist);
+					c = 2;
+					e = e + 2;
+					b = b + 1;
+					break;
+				}
 			}
-			j--;
 		}
-		_putchar(format[i]);
-		len++;
-		i++;
+		if (c == 0)
+			_putchar(format[b]);
+		b = b + 1;
 	}
-	va_end(args);
+	len = b + cuenf - e;
+	va_end(valist);
 	return (len);
 }
