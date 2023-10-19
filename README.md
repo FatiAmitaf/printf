@@ -1,2 +1,2 @@
 # 0x11. C - printf
-## Done by Fatima El Idrissi and Chris Okeke
+## Done by Fatima Idrissi and Chris Okeke
