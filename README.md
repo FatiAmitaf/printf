@@ -1,2 +1,2 @@
 # 0x11. C - printf
-This is project done by Fatima and Christopher
+printf is function used to display output on the user's interface
